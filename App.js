@@ -1,52 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native';
-import data from './data.js'
+import React from 'react';
+import dados from './data'
+import { FlatList, StyleSheet, Text, View, Image } from 'react-native';
+import { useState, useEffect } from 'react';
 
 
-const va = {
-  name: 'nome',
-  category: 'categoria',
-  price: 2000,
-  image: 'utl'
+
+export default function App(){
+  const lista = dados
+  console.log(lista)
+  const listaOb = lista.map(
+    (c,i)=>
+    <Text key={i}> {i} - {c.name}, {c.category}, {c.price},  </Text>
+  
+    )
+  const listaImg = lista.map(
+    (c,i)=>
+    <Image key={i} source={{uri: c.image}} style={{ width: 40, height: 40 }}/> 
+   
+    )
+
+    return (
+      <>
+
+      <Text>{listaOb}</Text>
+      <Text>{listaImg}</Text>
+
+      </>
+    )
 }
-
-
-//alert(data[0].name)
-
-export default function App() {
-  return (
-    <ScrollView> 
-         <FlatList
-         //{data.map((data) => <Text>{data}</Text>)}
-        // data={[
-        //   {key: data[0].name},
-        //   {key: data[1].name},
-        //   {key: data[2].name},
-        //   {key: data[3].name},
-        //   {key: data[4].name},
-        //   {key: data[5].name},
-        //   {key: data[6].name},
-        //   {key: data[7].name},
-        //   {key: data[8].name},
-        //   {key: data[9].name},
-        //   {key: data[10].name},
-        //   {key: data[11].name},
-        //   {key: data[12].name},
-        // ]}
-        data={[data.name]}
-        renderItem={({item}) => <Text>{item.key}</Text>}       
-      />    
-     
-      <StatusBar style="auto" />
-      </ScrollView>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
